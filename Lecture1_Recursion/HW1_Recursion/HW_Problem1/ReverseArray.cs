@@ -9,29 +9,36 @@
     public class ReverseArray
     {
         private int[] arr;
-
+        private int swapsCount;
+        
         public ReverseArray(int[] arr)
         {
             this.arr = arr;
-        }
-        
-        public void PrintRevirsed()
-        {
-            this.PrintReversed(0);
-        }
-        
-        private void PrintReversed(int index)
-        {
-            int revercedIndex = this.arr.Length -index - 1;
-            if (revercedIndex == 0)
-	        {
-                Console.WriteLine(arr[revercedIndex]);
-                return;
-	        }
-            Console.Write(arr[revercedIndex] + ", ");
-            this.PrintReversed(index + 1);
-            
+            this.swapsCount = this.arr.Length / 2;
         }
 
+        public void PrintReversed() 
+        {
+            this.Reverse();
+            this.Print();
+        }
+
+        private void Reverse(int index = 0) 
+        {
+            if (index > this.swapsCount)
+            {
+                return;
+            }
+            int swapIndex = this.arr.Length - 1 - index;
+            int temp = this.arr[index];
+            this.arr[index] = this.arr[swapIndex];
+            this.arr[swapIndex] = temp;
+            this.Reverse(index + 1);
+        }
+
+        private void Print() 
+        {
+            Console.WriteLine(string.Join(", ", this.arr));
+        }
     }
 }
